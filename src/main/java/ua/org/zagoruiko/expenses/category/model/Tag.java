@@ -18,4 +18,12 @@ public enum Tag {
         this.name = name;
         this.friendlyName = friendlyName;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFriendlyName() {
+        return friendlyName;
+    }
 }

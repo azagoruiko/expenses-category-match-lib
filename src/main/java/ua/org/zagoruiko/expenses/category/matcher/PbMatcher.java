@@ -3,12 +3,13 @@ package ua.org.zagoruiko.expenses.category.matcher;
 import ua.org.zagoruiko.expenses.category.model.Tag;
 import ua.org.zagoruiko.expenses.category.model.TransactionMetadata;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class PbMatcher implements Matcher {
+public class PbMatcher implements Matcher, Serializable {
     private final Map<String, String> categoryMatch = new HashMap<>();
     private final Map<String, String> exactMatch = new HashMap<>();
 

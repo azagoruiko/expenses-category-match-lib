@@ -1,10 +1,11 @@
 package ua.org.zagoruiko.expenses.category.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TransactionMetadata {
+public class TransactionMetadata implements Serializable {
     private final String category;
     private final Set<Tag> tags;
 
