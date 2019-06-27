@@ -1,55 +1,46 @@
 package ua.org.zagoruiko.expenses.category.matcher;
 
+import ua.org.zagoruiko.expenses.category.model.Category;
 import ua.org.zagoruiko.expenses.category.model.Tag;
 import ua.org.zagoruiko.expenses.category.model.TransactionMetadata;
+import ua.org.zagoruiko.expenses.category.resolver.Resolver;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class PbMatcher implements Matcher, Serializable {
-    private final Map<String, String> categoryMatch = new HashMap<>();
-    private final Map<String, String> exactMatch = new HashMap<>();
+    private final Collection<? extends Resolver<String>> categoryResolvers;
+    private final Collection<? extends Resolver<Set<Tag>>> tagResolvers;
 
-    public PbMatcher() {
-        this.categoryMatch.put("Продукты питания", "Food and Drinks");
-        this.categoryMatch.put("Кафе, бары, рестораны", "Cafe and Restaurants");
-        this.categoryMatch.put("Развлечения", "Entertainment");
-        this.categoryMatch.put("Коммунальные услуги", "Utilities");
-        this.categoryMatch.put("Пополнение мобильного", "Utilities");
+    public PbMatcher(Collection<? extends Resolver<String>> categoryResolvers,
+                      Collection<? extends Resolver<Set<Tag>>> tagResolvers) {
+        this.categoryResolvers = categoryResolvers;
+        this.tagResolvers = tagResolvers;
     }
 
     private String categoryFromOperationDesc(String operationDesc) {
-        if (operationDesc.contains("WFPTAXI")) {
-            return "Transport";
-        }
-        return "Unknown";
+        return this.categoryResolvers.stream()
+                .flatMap(r -> r.resolve(operationDesc)).findAny().orElse(Category.UNKNOWN.getFriendlyName());
     }
 
     private Set<Tag> tagsFromOperationDesc(String operationDesc) {
         Set<Tag> tags = new HashSet<>();
-        if (operationDesc.contains("WFPTAXI")) {
-            tags.add(Tag.TAG_TAXI);
-        }
-
-        if (operationDesc.contains("fozzy")) {
-            tags.add(Tag.TAG_FOZZY);
-        }
-        return tags;
+        tags.add(Tag.SRC_PRIVAT_BANK);
+        return this.tagResolvers.stream().flatMap(r -> r.resolve(operationDesc))
+                .reduce(tags, (accTags, newTags) -> {accTags.addAll(newTags); return accTags;});
     }
 
     @Override
     public TransactionMetadata metadata(Map<String, String> rawMetadata) {
-        String category = this.categoryMatch.get(rawMetadata.get("category"));
-        if (category == null) {
-            category = categoryFromOperationDesc(rawMetadata.get("operation"));
+        String category = categoryFromOperationDesc(rawMetadata.get("operation"));
+        if (Category.UNKNOWN.getFriendlyName().equals(category)) {
+            category = categoryFromOperationDesc(rawMetadata.get("category"));
         }
 
         Set<Tag> tags = tagsFromOperationDesc(rawMetadata.get("operation"));
-        tags.add(Tag.SRC_PRIVAT_BANK);
-
         return new TransactionMetadata(category, tags);
     }
 }
