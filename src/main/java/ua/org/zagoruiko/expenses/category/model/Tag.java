@@ -9,7 +9,9 @@ public enum Tag {
     TAG_HAS_DRINKS("HAS_DRINKS", "Purchase includes drinks"),
 
     TAG_TAXI("TAXI", "Taxi"),
-    TAG_TRANSPORT("TRANSPORT", "Transport");
+    TAG_TRANSPORT("TRANSPORT", "Transport"),
+    TAG_EAT_OUT("EAT_OUT", "Eat Out"),
+    TAG_YIDALNYA("YIDALNYA", "Stolovaya Buffet");
 
     private final String name;
     private final String friendlyName;

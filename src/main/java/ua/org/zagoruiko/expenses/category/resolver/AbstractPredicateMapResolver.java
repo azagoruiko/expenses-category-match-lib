@@ -5,7 +5,7 @@ import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
 public abstract class AbstractPredicateMapResolver<O> extends AbstractByMapResolver<O> {
-    protected BiPredicate<String, String> predicate;
+    protected SerializableBiPredicate<String, String> predicate;
 
     @Override
     protected Stream<O> resolveByMap(String input) {
@@ -13,7 +13,7 @@ public abstract class AbstractPredicateMapResolver<O> extends AbstractByMapResol
                 .filter(entry -> this.predicate.test(input, entry.getKey())).map(entry -> entry.getValue());
     }
 
-    public AbstractPredicateMapResolver(Map<String, O> mapping, BiPredicate<String, String> predicate) {
+    public AbstractPredicateMapResolver(Map<String, O> mapping, SerializableBiPredicate<String, String> predicate) {
         super(mapping);
         this.predicate = predicate;
     }

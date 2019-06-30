@@ -5,13 +5,12 @@ import ua.org.zagoruiko.expenses.category.model.Tag;
 import ua.org.zagoruiko.expenses.category.model.TransactionMetadata;
 import ua.org.zagoruiko.expenses.category.resolver.Resolver;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class PbMatcher implements Matcher, Serializable {
+public class PbMatcher implements Matcher {
     private final Collection<? extends Resolver<String>> categoryResolvers;
     private final Collection<? extends Resolver<Set<Tag>>> tagResolvers;
 
