@@ -3,7 +3,7 @@ package ua.org.zagoruiko.expenses.category.resolver;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public abstract class AbstractByMapResolver<O> implements Resolver<O> {
+public abstract class AbstractByMapResolver<O> implements ResolverFromString<O> {
     protected final Map<String, O> mapping;
 
     public AbstractByMapResolver(Map<String, O> mapping) {

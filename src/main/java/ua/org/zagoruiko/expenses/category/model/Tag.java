@@ -1,31 +1,39 @@
 package ua.org.zagoruiko.expenses.category.model;
 
-public enum Tag {
-    SRC_PRIVAT_BANK("SRC_PRIVAT_BANK", "Privat Bank"),
-    SRC_CASH("SRC_CASH", "Cash"),
-
-    TAG_FOZZY("FOZZY", "Fozzy market"),
-    TAG_SUPERMARKET("SUPERMARKET", "Some market"),
-    TAG_HAS_DRINKS("HAS_DRINKS", "Purchase includes drinks"),
-
-    TAG_TAXI("TAXI", "Taxi"),
-    TAG_TRANSPORT("TRANSPORT", "Transport"),
-    TAG_EAT_OUT("EAT_OUT", "Eat Out"),
-    TAG_YIDALNYA("YIDALNYA", "Stolovaya Buffet");
-
+public class Tag {
     private final String name;
-    private final String friendlyName;
+    private final String description;
 
-    Tag(String name, String friendlyName) {
+    public Tag(String name, String description) {
         this.name = name;
-        this.friendlyName = friendlyName;
+        this.description = description;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getFriendlyName() {
-        return friendlyName;
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tag)) return false;
+
+        Tag tag = (Tag) o;
+
+        return name.equals(tag.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
