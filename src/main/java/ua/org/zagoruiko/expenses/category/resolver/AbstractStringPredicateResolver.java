@@ -1,6 +1,8 @@
 package ua.org.zagoruiko.expenses.category.resolver;
 
-public abstract class AbstractStringPredicateResolver<O> extends AbstractStringPatternResolver<O> {
+import java.io.Serializable;
+
+public abstract class AbstractStringPredicateResolver<O> extends AbstractStringPatternResolver<O> implements Serializable {
     protected SerializableBiPredicate<String, String> predicate;
     protected O resolved;
     protected O notResolved;
