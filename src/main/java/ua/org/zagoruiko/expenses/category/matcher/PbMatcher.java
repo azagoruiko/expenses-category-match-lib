@@ -4,12 +4,13 @@ import ua.org.zagoruiko.expenses.category.model.SystemTag;
 import ua.org.zagoruiko.expenses.category.model.Tag;
 import ua.org.zagoruiko.expenses.category.resolver.ResolverFromString;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class PbMatcher implements Matcher<Map<String, String>> {
+public class PbMatcher implements Matcher<Map<String, String>>, Serializable {
     private final Collection<? extends ResolverFromString<Set<Tag>>> tagResolvers;
 
     public PbMatcher(Collection<? extends ResolverFromString<Set<Tag>>> tagResolvers) {

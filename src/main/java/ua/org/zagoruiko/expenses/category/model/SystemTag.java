@@ -1,6 +1,8 @@
 package ua.org.zagoruiko.expenses.category.model;
 
-public enum SystemTag {
+import java.io.Serializable;
+
+public enum SystemTag implements Serializable {
     SRC_PRIVAT_BANK(new Tag("SRC_PRIVAT_BANK", "Privat Bank")),
     SRC_CASH(new Tag("SRC_CASH", "Cash")),
 

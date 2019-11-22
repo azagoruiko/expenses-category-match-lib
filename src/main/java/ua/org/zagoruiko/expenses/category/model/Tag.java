@@ -1,6 +1,8 @@
 package ua.org.zagoruiko.expenses.category.model;
 
-public class Tag {
+import java.io.Serializable;
+
+public class Tag implements Serializable {
     private final String name;
     private final String description;
 
