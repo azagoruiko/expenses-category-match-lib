@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class ContainsTagsFromStringResolver extends AbstractTagsFromStringPredicateResolver implements Serializable {
+    public static final String ID = "CONTAINS";
     public ContainsTagsFromStringResolver(String pattern, Set<Tag> resolved) {
         super(pattern,
                 (s1, s2) -> s1.toUpperCase().contains(s2.toUpperCase()), resolved);
