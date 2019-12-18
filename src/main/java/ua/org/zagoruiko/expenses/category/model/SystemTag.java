@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public enum SystemTag implements Serializable {
     SRC_PRIVAT_BANK(new Tag("SRC_PRIVAT_BANK", "Privat Bank")),
+    SRC_ALFA_BANK(new Tag("SRC_ALFA_BANK", "Alfa Bank")),
+    SRC_SPREADSHEETS(new Tag("SRC_SPREADSHEETS", "Old Google Spreadsheets")),
     SRC_CASH(new Tag("SRC_CASH", "Cash")),
 
     TAG_FOZZY(new Tag("FOZZY", "Fozzy market")),
