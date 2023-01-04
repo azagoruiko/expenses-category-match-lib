@@ -7,6 +7,7 @@ public enum SystemTag implements Serializable {
     SRC_ALFA_BANK(new Tag("SRC_ALFA_BANK", "Alfa Bank")),
     SRC_SPREADSHEETS(new Tag("SRC_SPREADSHEETS", "Old Google Spreadsheets")),
     SRC_CASH(new Tag("SRC_CASH", "Cash")),
+    SRC_CS(new Tag("SRC_CS_CZ", "Ceska Sporitelna")),
 
     TAG_FOZZY(new Tag("FOZZY", "Fozzy market")),
     TAG_SUPERMARKET(new Tag("SUPERMARKET", "Some market")),
